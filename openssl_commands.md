@@ -93,9 +93,9 @@ openssl rsa -noout -modulus -in server.key| openssl md5
 ```
 #### Verify match between cert, CSR and key
 ```bash
-openssl x509 -noout -modulus www.server.com.crt | openssl md5
-openssl req -noout -modulus www.server.com.csr | openssl md5
-openssl rsa -noout -modulus www.server.com.key | openssl md5
+openssl x509 -noout -modulus -in www.server.com.crt | openssl md5
+openssl req -noout -modulus -in www.server.com.csr | openssl md5
+openssl rsa -noout -modulus -in www.server.com.key | openssl md5
 ```
 
 #### Validate whether a certificate was issued by a specific CA
