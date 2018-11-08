@@ -120,5 +120,17 @@ Remove the passphrase of an encrypted private key
 openssl rsa -in www.server.com.key -out www.server.com.key
 ```
 
+##
+### Create a key-pair using ssh-keygen
+```bash
+ssh-keygen -t rsa -b 4096 -f /path/to/key
+```
+
+This command uses the following options and will create two files, one containing the private key and other with the public key (file.pub):
+
+ - **-t** : sets the type of the key.
+ - **-b** : sets the size of the key.
+ - **-f** : sets the path where the files will be created (by default into ~/.ssh folder).
+
 #### Source:
 [Openssl docs](https://www.openssl.org/docs/man1.0.2/apps/)

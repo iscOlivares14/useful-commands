@@ -4,6 +4,6 @@ This repository will contain a series of commands used on my tasks for developme
 
 Commands are from the next tools:
 
-* OpenSSL
+* OpenSSL [See](openssl_commands.md)
 * vagrant
 * Ansible
