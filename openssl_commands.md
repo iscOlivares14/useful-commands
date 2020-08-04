@@ -1,6 +1,15 @@
+OpenSSL
+-----
+
+- [My own CA using openssl](#My-own-CA-using-openssl)
+  - [Generate CA certificate and key](#Generate-CA-certificate-and-key)
+    - [Generate RSA key](#Generate-RSA-key)
+    - [Generate CERT (pem file)](#Generate-CERT-pem-file)
+  - [Creating CA-signed Certificates](#Creating-CA-signed-Certificates)
+
 ## My own CA using openssl
 
-When we need to implement security into our web apps or web services in an internal network we can implement a solution based on be our own CA to validate the requests into our infrastructure.
+When we need to implement security into our web apps or web services in an internal network we can implement a solution based on being our own CA to validate the requests to our servers and between them.
 
 ### Generate CA certificate and key
 #### Generate RSA key
@@ -31,6 +40,7 @@ This command uses the following parameters:
  - **-days**: when the -x509 option is being used this specifies the number of days to certify the certificate for. Default is 30 days.
  - **-out** : output request to the specified file
 
+-----
 ### Creating CA-signed Certificates
 
 To sign a certificate for enable the responses over resources protected by certificates you will need to follow this steps:
@@ -52,17 +62,7 @@ In other way you can use this command to create both the private key and de cert
 openssl req -out client1.localhost.csr -new -newkey rsa:1024 -nodes -keyout client1.localhost.key
 ```
 
-#### Create .p12 file using private key and CRT
-First concat private key and CRT in a new single file `p12file.txt`.
-````bash
-cat /path/to/private.key /path/to/certificate.crt > /path/to/keyandcert.txt
-````
-Then create the p12 file using OpenSSL
-```bash
-openssl pkcs12 -export -in filename.txt -out filename.p12
-```
-
-##
+-----
 ### Sign request with CA
 Then, we'll **sign** this CSR, using the CA private key and the CA cert (client1 is a folder to example valid credentials), this command uses **x509** which is a multipurpose certificate utility. It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings:
 ```bash
@@ -80,6 +80,17 @@ This option is normally combined with the  **-req**  option. Without the  **-req
  - **-days**: specifies the number of days to make a certificate valid for. The default is 30 days.
  - **-out** : output request to the specified file
 
+ #### Create .p12 file using private key and CRT
+ First concat private key and CRT in a new single file `p12file.txt`.
+ ````bash
+ cat /path/to/private.key /path/to/certificate.crt > /path/to/keyandcert.txt
+ ````
+ Then create the p12 file using OpenSSL
+ ```bash
+ openssl pkcs12 -export -in filename.txt -out filename.p12
+ ```
+
+-----
 ### Validations over certs and keys
 #### View data on certificates, request and private keys
 
@@ -118,6 +129,7 @@ openssl verify -verbose -CAfile cacert.pem mycert.crt
 and the response should be like `mycert.crt: OK`
 If yo get any other message, the certificate was not issued by that CA.
 
+-----
 ### Additional commands
 Generate a _self-signed_ certificate (usually for test)
 ```bash
@@ -132,7 +144,7 @@ Remove the passphrase of an encrypted private key
 openssl rsa -in www.server.com.key -out www.server.com.key
 ```
 
-##
+-----
 ### Create a key-pair using ssh-keygen
 ```bash
 ssh-keygen -t rsa -b 4096 -f /path/to/key
