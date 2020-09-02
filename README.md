@@ -1,5 +1,9 @@
-# useful-commands :surfer:
-This repository contains a series of commands used on my daily basis tasks for development and operations. For example commands that involves an application I'll be using [this]() :snake: python application .
+# Useful Commands :surfer:
+
+This repository contains a series of commands used on my daily basis tasks for development and operations. 
+
+> [!NOTE]
+> To cover some commands and their use related to an application I'll be using [this]() :snake: python application .
 
 Commands are from the next tools: :memo: 
 
@@ -13,7 +17,7 @@ Commands are from the next tools: :memo:
 
 **Ansible** [See :link:](ansible_commands.md) _A configuration management tool which has a description of how you infrastructure should look like and what they must have installed and help achieving those requirements._
 
-**Docker** [See :link:](ansible_commands.md)
+**Docker** [See :link:](docker_commands.md)
 
 **K8s** [See :link:](kubernetes_commands.md)
 

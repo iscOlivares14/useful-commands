@@ -5,7 +5,12 @@ OpenSSL
   - [Generate CA certificate and key](#Generate-CA-certificate-and-key)
     - [Generate RSA key](#Generate-RSA-key)
     - [Generate CERT (pem file)](#Generate-CERT-pem-file)
-  - [Creating CA-signed Certificates](#Creating-CA-signed-Certificates)
+- [Creating CA-signed Certificates](#Creating-CA-signed-Certificates)
+    - [Create private key](#Create-private-key) 
+    - [Create CSR](#Create-CSR)
+    - [Create private key and CSR](#Create-private-key-and-CSR)
+- [Sign request with CA](#Sign-request-with-CA)
+    - [Create .p12 file using private key and CRT](Create-.p12-file-using-private-key-and-CRT)
 
 ## My own CA using openssl
 
@@ -65,9 +70,11 @@ openssl req -out client1.localhost.csr -new -newkey rsa:1024 -nodes -keyout clie
 -----
 ### Sign request with CA
 Then, we'll **sign** this CSR, using the CA private key and the CA cert (client1 is a folder to example valid credentials), this command uses **x509** which is a multipurpose certificate utility. It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings:
+
 ```bash
 openssl x509 -req -in client1/client1.localhost.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out client1.localhost.crt -days 356 -sha256
 ```
+
 This command uses the following parameters:
 
  - **-req** : by default a certificate is expected on input. With this option a certificate request is expected instead.
@@ -156,5 +163,6 @@ This command uses the following options and will create two files, one containin
  - **-b** : sets the size of the key.
  - **-f** : sets the path where the files will be created (by default into ~/.ssh folder).
 
+
 #### Source:
-[Openssl docs](https://www.openssl.org/docs/man1.0.2/apps/)
+> [Openssl docs](https://www.openssl.org/docs/man1.0.2/apps/)
