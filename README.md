@@ -13,6 +13,8 @@ Commands are from the next tools: :memo:
 
 **Vagrant** [See :link:](vagrant_commands.md) _A wrapper for VM providers in order to facilitate their usage, VBox in this case._
 
+**Git** [See :link:](git_commands.md) _The CLI for handling repositories_
+
 **Terraform** [See :link:](terraform_commands.md) _It's an automation infrastructure agnostic tool focused on to describe and track the state of your infrastructure support multiple providers (AWS, Azure, etc)._
 
 **Ansible** [See :link:](ansible_commands.md) _A configuration management tool which has a description of how you infrastructure should look like and what they must have installed and help achieving those requirements._
