@@ -1,4 +1,4 @@
-## Docker commands
+## Docker handling
 
 ### build
 
@@ -19,6 +19,10 @@ $ docker build --file server.Dockerfile --tag first-server .
 Run a container in detached mode (running in background)
 ```bash
 $ docker run -d  <image-name>
+# interactive mode and telnet open
+$ docker run -it  <image-name>
+# naming the container
+$ docker run --name <container-name> -d  <image-name>
 ```
 
 Run the image adding a mount pointed to a local directory
@@ -44,7 +48,7 @@ Simply gracefully stop the container without removing it
 $ docker stop <Container_ID>
 
 # indicating termination of the container
-$ docker stp -t 0h <Container_ID>
+$ docker stop -t 0h <Container_ID>
 ```
 
 ### kill
@@ -62,14 +66,61 @@ Remove all stopped containers
 $ docker ps -aq | xargs docker rm
 ```
 
+```bash
+
+$ docker rmi <containers-name>
+```
+
 ### tags
 
-This movements
-
 ```bash
-$ docker tag <image-name> <DockerHub_ID>/<container_name>:<container__tags>
+# change tag for an image pointing it to a dockerHUb account
+$ docker tag <image-name> <DockerHub_ID>/<container_name>:<container_tags>
 
 $ docker tag first-web-server veolivaresr/first-web-server:0.0.1
 ```
 
 
+### push
+
+```bash
+$ docker push   veolivaresr/first-web-server:0.0.1
+```
+
+### prune
+
+This command is usefull whe you look for freeing up disk space.
+
+```bash
+$ docker system prune
+```
+
+
+## Debugging commands
+
+### stats
+
+```bash
+$ docker stats
+```
+
+### top
+
+```bash
+$ docker top
+```
+
+### inspect
+
+```bash
+$ docker inspect <container-name>
+
+# for better visualization use less
+$ docker inspect <container-name> | less
+```
+
+## Best practices
+
+- Always use verified images
+- Avoid tagging as latest
+- Use non-root users
