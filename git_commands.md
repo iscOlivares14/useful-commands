@@ -1,4 +1,4 @@
-### Using WSL
+## Using WSL
 
 If you enabled Windows Subsystem Linux to work you could face some permissions issues between Windows and your Subsystem in my case Ubuntu Bionic.
 
@@ -9,3 +9,6 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 ```
 More details: 
 https://newbedev.com/git-discovery-across-filesystem-not-set
+
+## Save local git repo in github
+

@@ -1,90 +1,119 @@
-## Docker handling
+# Docker handling
+
+## Operational Commands
+
+### List docker items
+
+Images
+
+```bash
+docker image ls
+```
 
 ### build
 
 Once you have defined a [Dockerfile](https://docs.docker.com/build/guide/intro/#the-dockerfile) you can build your image as follows:
 
 ```bash
-$ docker build -t <image-name> <dockerfile-path>
-
+docker build -t <image-name> <dockerfile-path>
 # Dockerfile is in the directory from where we executes the command
-$ docker build -t reporeporter .
-
+docker build -t reporeporter .
 # dockerfile named different than default
-$ docker build --file server.Dockerfile --tag first-server .
+docker build --file server.Dockerfile --tag first-server .
+```
+
+### pull
+
+Pull objects from public and private sources as standar but also using tags.
+
+```bash
+docker pull <image-name>
+docker pull <image-name>:<tag>
 ```
 
 ### run
 
 Run a container in detached mode (running in background)
+
 ```bash
-$ docker run -d  <image-name>
+docker run -d  <image-name>
 # interactive mode and telnet open
-$ docker run -it  <image-name>
+docker run -it  <image-name>
 # naming the container
-$ docker run --name <container-name> -d  <image-name>
+docker run --name <container-name> -d  <image-name>
 ```
 
 Run the image adding a mount pointed to a local directory
-```bash
-$ docker run -v <local-directory-path>:<container-directory-path> <image-name>
 
-$ docker run -v $(pwd)/tmp:/tmp reporeporter
+```bash
+docker run -v <local-directory-path>:<container-directory-path> <image-name>
+
+docker run -v $(pwd)/tmp:/tmp reporeporter
 # this will persist the files and you could see it in your local
-$ docker run --rm --entrypoint sh -v /tmp/container:/tmp ubuntu -c "echo 'Hello there.' > /tmp/file && cat /tmp/file"
+docker run --rm --entrypoint sh -v /tmp/container:/tmp ubuntu -c "echo 'Hello there.' > /tmp/file && cat /tmp/file"
 ```
 
 Binds local port to container ports
-```bash
-$ docker run -d -p <host_port>:<container_port> <image-name>
 
-$ docker run -d -p 5001:5000 first-web-server
+```bash
+docker run -d -p <host_port>:<container_port> <image-name>
+
+docker run -d -p 5001:5000 first-web-server
 ```
 
 ### stop
 
 Simply gracefully stop the container without removing it
+
 ```bash
-$ docker stop <Container_ID>
+docker stop <Container_ID>
 
 # indicating termination of the container
-$ docker stop -t 0h <Container_ID>
+docker stop -t 0h <Container_ID>
 ```
 
 ### kill
 
 Kill one or more running containers
+
 ```bash
-$ docker kill <Image_ID>
+docker kill <Image_ID>
 ```
 
 ### rm & rmi
 
-Remove all stopped containers
-```bash
+Remove a container by Id
 
-$ docker ps -aq | xargs docker rm
+```bash
+docker rm <CONTAINER_ID>
 ```
 
-```bash
+Remove all stopped containers
 
-$ docker rmi <containers-name>
+```bash
+docker ps -aq | xargs docker rm
+```
+
+Remove images
+
+```bash
+docker rmi <containers-name>
 ```
 
 ### tags
 
 ```bash
+docker tag <image_id> <tag-name>
 # change tag for an image pointing it to a dockerHUb account
-$ docker tag <image-name> <DockerHub_ID>/<container_name>:<container_tags>
+docker tag <image-name> <DockerHub_ID>/<container_name>:<container_tags>
 
-$ docker tag first-web-server veolivaresr/first-web-server:0.0.1
+docker tag first-web-server veolivaresr/first-web-server:0.0.1
 ```
-
 
 ### push
 
 ```bash
-$ docker push   veolivaresr/first-web-server:0.0.1
+docker push   veolivaresr/first-web-server:0.0.1
 ```
 
 ### prune
@@ -92,31 +121,38 @@ $ docker push   veolivaresr/first-web-server:0.0.1
 This command is usefull whe you look for freeing up disk space.
 
 ```bash
-$ docker system prune
+docker system prune
 ```
-
 
 ## Debugging commands
 
 ### stats
 
 ```bash
-$ docker stats
+docker stats
 ```
 
 ### top
 
 ```bash
-$ docker top
+docker top
 ```
 
 ### inspect
 
 ```bash
-$ docker inspect <container-name>
+# for checking env, cmd and Layers properties
+docker image inspect <image_name>
+
+# look for environment variables
+docker image inspect <image_name> | jq .[].Config.Env
+docker image inspect <image_name> | jq .[].Config.Cmd
+docker image inspect <image_name> | jq .[].RootFS.Layers
+
+docker inspect <container-name>
 
 # for better visualization use less
-$ docker inspect <container-name> | less
+docker inspect <container-name> | less
 ```
 
 ## Best practices

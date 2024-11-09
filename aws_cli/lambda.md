@@ -25,34 +25,3 @@ You can specify adicional arguments and flags to the command as you can see:
 
 [More information :link:](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/sync.html) about **sync**
 
-## rm
-
-Will let you delete the elements inside a bucket:
-
-`<S3Uri>`
-
-```bash
-aws s3 rm s3://path.to.bucket.folder --recursive --only-show-errors
-# will remove the content of path.to.bucket.folder
-```
-
-You can specify adicional arguments and flags to the command as you can see:
-
-* `--quiet` (boolean) Does not display the operations performed from the specified command.
-* `--recursive` (boolean) Command is performed on all files or objects under the specified directory or prefix.
-* `--only-show-errors` (boolean) Only errors and warnings are displayed. All other output is suppressed
-
-[More information :link:](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/rm.html) about **rm**
-
-## rb
-
-Once the bucket is empty you can delete it or even use `--force` to force objects deletion and finally remove the bucket.
-
-```bash
-aws s3 rm s3://path.to.bucket
-
-# delete all objects then the bucket
-aws s3 rm s3://path.to.bucket --force
-```
-
-[More information :link:](https://docs.aws.amazon.com/cli/latest/reference/s3/rb.html) about **rb**
