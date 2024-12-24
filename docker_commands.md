@@ -61,6 +61,16 @@ docker run -d -p <host_port>:<container_port> <image-name>
 docker run -d -p 5001:5000 first-web-server
 ```
 
+Running the cointainers with mounted volumes
+
+```bash
+docker run -it --name <container-name> --mount type=tmpfs, target=/tmpfs-mount <image-name> <command>
+docker run -it --name tmpfs-test --mount type=tmpfs, target=/tmpfs-mount ubuntu bash
+
+docker run -it --name <container-name> --mount type=tmpfs, target=/tmpfs-mount <image-name> <command>
+docker run -it --name tmpfs-test --mount type=tmpfs, target=/tmpfs-mount ubuntu bash
+```
+
 ### stop
 
 Simply gracefully stop the container without removing it
@@ -151,6 +161,8 @@ docker image inspect <image_name> | jq .[].RootFS.Layers
 
 docker inspect <container-name>
 
+# look for mounts
+docker inspect <container-name> | jq .[0].Mounts
 # for better visualization use less
 docker inspect <container-name> | less
 ```
@@ -160,3 +172,8 @@ docker inspect <container-name> | less
 - Always use verified images
 - Avoid tagging as latest
 - Use non-root users
+- Containers should be ephemeral
+- Keep the build context minimal
+- Use multi-stage builds
+- Skip unwanted packages
+- Minimize the number of layers

@@ -95,7 +95,7 @@ kubectl logs __ETCD_POD_name__ -n kubesystem | jq .
 ### Create worload files
 
 ```bash
-kubectl create deployment --dry-run=client --image localhost:5000/explorecalifornia.com explorecalifornia.com --output=yaml
-
 kubectl create deployment --dry-run=[client|server] --image <image_full_path> <deployment_name> --output=yaml > <file_to_persist_in>
+
+kubectl create deployment --dry-run=client --image localhost:5000/explorecalifornia.com explorecalifornia.com --output=yaml
 ```
